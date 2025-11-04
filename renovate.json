@@ -22,16 +22,5 @@
   "semanticCommits": "disabled",
   "postUpdateOptions": [
     "gomodTidy"
-  ],
-  "packageRules": [
-    {
-      "matchPackageNames": [
-        "golangci/golangci-lint"
-      ],
-      "extends": [
-        "schedule:weekends"
-      ],
-      "automerge": true
-    }
   ]
 }

@@ -34,6 +34,13 @@ _testmain.go
 .direnv
 .env
 
+# Repository Metadata
+.gitignore
+.git
+.forgejo/
+.editorconfig
+renovate.json
+
 # Local files
 config.json
 *-cache.*

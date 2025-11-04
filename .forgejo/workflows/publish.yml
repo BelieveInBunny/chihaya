@@ -9,6 +9,7 @@ on:
             - master
         paths:
             - Dockerfile
+            - .dockerignore
             - .forgejo/workflows/publish.yml
         types: [ opened, synchronize, reopened ]
     release:
@@ -28,6 +29,11 @@ jobs:
                 with:
                     fetch-depth: 0
                     fetch-tags: true
+            -   name: Parse version from tags
+                id: version
+                run: |
+                    VERSION=$(git describe --tags --always | sed 's/-/+/' | sed 's/^v//')
+                    echo "version=$VERSION" >> $GITHUB_OUTPUT
             -   name: Login to registry
                 if: forge.event_name != 'pull_request'
                 uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3
@@ -51,6 +57,8 @@ jobs:
                 uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6
                 with:
                     context: .
+                    build-args: |
+                        VERSION=${{ steps.version.outputs.version }}
                     push: ${{ forge.event_name != 'pull_request' }}
                     tags: ${{ steps.meta.outputs.tags }}
                     labels: ${{ steps.meta.outputs.labels }}

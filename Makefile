@@ -1,10 +1,4 @@
-STORED_VERSION=$(shell cat VERSION 2>/dev/null)
-ifneq ($(STORED_VERSION),)
-	VERSION ?= $(STORED_VERSION)
-else
-	VERSION ?= $(shell git describe --tags --always | sed 's/-/+/' | sed 's/^v//')
-endif
-
+VERSION ?= $(shell git describe --tags --always | sed 's/-/+/' | sed 's/^v//')
 BUILDTIME := $(shell date -u '+%Y-%m-%dT%H:%M:%SZ')
 
 GOLDFLAGS += -X main.BuildDate=$(BUILDTIME)
