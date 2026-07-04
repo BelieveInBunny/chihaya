@@ -140,17 +140,13 @@ func (db *Database) Init() {
 		panic(err)
 	}
 
-	dbUsers := make(map[string]*cdb.User)
-	db.Users.Store(&dbUsers)
+	db.Users.Store(new(make(map[string]*cdb.User)))
 
-	dbTorrents := make(map[cdb.TorrentHash]*cdb.Torrent)
-	db.Torrents.Store(&dbTorrents)
+	db.Torrents.Store(new(make(map[cdb.TorrentHash]*cdb.Torrent)))
 
-	dbHitAndRuns := make(map[cdb.UserTorrentPair]struct{})
-	db.HitAndRuns.Store(&dbHitAndRuns)
+	db.HitAndRuns.Store(new(make(map[cdb.UserTorrentPair]struct{})))
 
-	dbClients := make(map[uint16]string)
-	db.Clients.Store(&dbClients)
+	db.Clients.Store(new(make(map[uint16]string)))
 
 	db.deserialize()
 

@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## v14.0.0
+### Changed
+- Do not give out peers whose port is in well-known range
+- Bump minimum Go version to 1.26.3
+
 ## v13.0.3
 ### Fixed
 - Peers sending `stopped` event not being updated in database as inactive
